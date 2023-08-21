@@ -1,10 +1,18 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const app = express();
 const network = require("./routes/network");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+const app = express();
+
+app.use(bodyParser.json());
+
+mongoose.connect("mongodb://localhost/mydatabase", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "Servarba yofta natonist"));
 
 app.use("/network", network);
 
