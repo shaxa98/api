@@ -1,17 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const Network = require("../modules/network-modules");
+const Webchanel = require("../modules/webchanel-modules");
 
 router.get("/", async (req, res) => {
-  const networks = await Network.find({}, "_id name imageUrl");
-  res.json(networks);
+  const Webchanels = await Webchanel.find({}, "_id name imageUrl");
+  res.json(Webchanels);
 });
 
 router.post("/", async (req, res) => {
   const { name, imageUrl } = req.body;
-  const newNetwork = new Network({ name, imageUrl });
-  await newNetwork.save();
-  res.json(newNetwork);
+  const newWebchanel = new Webchanel({ name, imageUrl });
+  await newWebchanel.save();
+  res.json(newWebchanel);
 });
 
 module.exports = router;
