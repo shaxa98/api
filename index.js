@@ -9,12 +9,18 @@ const app = express();
 
 app.use(bodyParser.json());
 
-mongoose.connect(`${process.env.MONGO_URL}/${process.env.MONGO_DATABASE}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "Servarba yofta natonist"));
+mongoose
+  .connect(`${process.env.MONGO_URL}/${process.env.MONGO_DATABASE}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((conn) => {
+    console.log("MONGO_DB Connected!");
+  })
+  .catch((err) => {
+    console.log("connection to db failed");
+    console.log(err.name, err.message);
+  });
 
 app.use("/network", network);
 app.use("/web-chanel", webChanel);

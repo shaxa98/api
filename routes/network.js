@@ -3,13 +3,12 @@ const router = express.Router();
 const Network = require("../modules/network-modules");
 
 router.get("/", async (req, res) => {
-  const networks = await Network.find({}, "_id name imageUrl");
+  const networks = await Network.find();
   res.json(networks);
 });
 
 router.post("/", async (req, res) => {
-  const { name, image } = req.body;
-  const newNetwork = new Network({ name, image });
+  const newNetwork = new Network(req.body);
   await newNetwork.save();
   res.json(newNetwork);
 });
