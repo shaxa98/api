@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const network = require("./routes/network");
 const webChanel = require("./routes/web-channels");
 require("dotenv").config();
+const cors = require("cors");
+app.use(cors());
 
 const app = express();
 
