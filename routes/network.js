@@ -8,8 +8,8 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { name, imageUrl } = req.body;
-  const newNetwork = new Network({ name, imageUrl });
+  const { name, image } = req.body;
+  const newNetwork = new Network({ name, image });
   await newNetwork.save();
   res.json(newNetwork);
 });
